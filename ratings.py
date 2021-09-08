@@ -113,9 +113,26 @@ def fxn_b(mydict):
 def ask_for_new_rating(mydict):
     """Ask for user inputs for a new restuarant name and rating, which is stored in the given dictionary."""
     restaurant_name = input('Restaurant name: ')
-    restaurant_score = input('Restaurant score: ')
+    restaurant_score = ask_for_valid_score()
     mydict[restaurant_name] = int(restaurant_score)
     return mydict
+
+
+def ask_for_valid_score():
+    """Return restaurant score (int between 1 and 5 inclusive) based on user input."""
+    while True:
+        try:
+            restaurant_score = int(input('Restaurant score: '))
+        except ValueError:
+            print("This is an invalid score. Please input an integer between 1 and 5 inclusive.")
+        else:
+            break
+    if 1 <= restaurant_score <= 5:
+        return restaurant_score
+    else:
+        print("This is an invalid score. Please input an integer between 1 and 5 inclusive.")
+        ask_for_valid_score()
+
 
 
 if __name__ == "__main__":
